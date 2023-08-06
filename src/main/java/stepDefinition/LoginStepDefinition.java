@@ -47,10 +47,5 @@ public class LoginStepDefinition {
         System.out.println(homePageHeader);
         Assert.assertEquals( "Products", homePageHeader );
     }
-    @Then( "^Close the browser$" )
-    public void close_the_browser(){
-
-        driver.quit();
-    }
 
 }

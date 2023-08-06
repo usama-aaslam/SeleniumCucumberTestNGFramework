@@ -2,6 +2,7 @@ package Utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.FileInputStream;
@@ -26,11 +27,15 @@ public class BaseTest {
     }
 
     //Launch the browser
+
 public static void intialization(){
         String browserName = properties.getProperty( "browser" );
         if(browserName.equals("chrome")){
             System.setProperty( "webdriver.chrome.driver", "src/main/resources/chromedriver.exe" );
-            driver = new ChromeDriver();
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments( "--remote-allow-origins=*" );
+            driver = new ChromeDriver(options);
         }
         else if(browserName.equals("firefox")){
             System.setProperty ("webdriver.gecko.driver","src/main/resources/geckodriver.exe") ;

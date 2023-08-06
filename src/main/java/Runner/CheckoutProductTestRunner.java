@@ -1,7 +1,9 @@
 package Runner;
 
+import Utilities.BaseTest;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -11,8 +13,10 @@ import org.junit.runner.RunWith;
         plugin= { "pretty", "html:target/cucumber-reports.html"},
         dryRun = false,    // it will check if any step is not defined in definition file
         monochrome = true,     //displays the console output in readable format
-        tags = "@SmokeTest"   //execute test cases on the basis of tags
+        tags = "@RegressionTests"   //execute test cases on the basis of tags
 )
 
 public class CheckoutProductTestRunner {
+
+
 }

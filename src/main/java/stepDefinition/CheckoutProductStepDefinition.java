@@ -13,7 +13,8 @@ public class CheckoutProductStepDefinition extends BaseTest {
     LoginPage loginPage;
     HomePage homePage;
 
-    Checkout checkout;
+    private Checkout checkout ;
+
 
     @Given("^user open the browser$")
     public void user_open_the_browser() {
@@ -54,21 +55,26 @@ public class CheckoutProductStepDefinition extends BaseTest {
 
     @Given("^user go to cart$")
     public void user_go_to_cart() {
-        checkout = new Checkout();
+        checkout= new Checkout();
         checkout.GoToCart();
 
     }
     @Then("^user enter checkout information$")
     public void user_enter_checkout_information() {
+        checkout.CheckOutStep1( properties.getProperty( "firstName" ) , properties.getProperty( "lastName" ), properties.getProperty( "zipCode" ));
+        double orderTotal= checkout.validateCartTotal();
+        Assert.assertEquals( 43.18, orderTotal, 0.001 );
 
     }
     @Then("^user finish and checkout$")
     public void user_finish_and_checkout() {
-
+        checkout.FinishCheckout();
     }
-    @Then("^validate user checkout successfully$")
+    @And("^validate user checkout successfully$")
     public void validate_user_checkout_successfully() {
-
+        String successText = checkout.validateCheckoutComplete();
+        Assert.assertEquals( "Thank you for your order!" , successText );
+        checkout.clickBackToHome();
     }
 
     @Then( "^close browser$" )

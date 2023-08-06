@@ -1,5 +1,5 @@
 Feature: Sauce Demo application Test
-  @SmokeTest
+  @RegressionTests
   Scenario: Validate product added to cart successfully
     Given user open the browser
     Then user is on login page
@@ -9,7 +9,7 @@ Feature: Sauce Demo application Test
     Then validate product added to cart successfully
 
 
- @SmokeTest
+ @RegressionTests
   Scenario: Checkout from the cart
     Given user go to cart
     Then user enter checkout information

@@ -1,6 +1,7 @@
 package Pages;
 
 import Utilities.BaseTest;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -24,8 +25,8 @@ public class Checkout extends BaseTest {
     @FindBy(id = "continue")
     WebElement continueBtnCheckout;
 
-  //  @FindBy(className = "summary_info_label summary_total_label")
-   // WebElement carTotal;
+    @FindBy(xpath = "//*[@class=\"summary_info_label summary_total_label\"]")
+    WebElement carTotal;
 
     @FindBy(id = "finish")
     WebElement finishBtn;
@@ -38,7 +39,8 @@ public class Checkout extends BaseTest {
 
     //initializing the page object
     public Checkout(){
-        PageFactory.initElements( driver, this );
+
+        PageFactory.initElements( BaseTest.driver, this );
 
     }
 
@@ -47,5 +49,28 @@ public class Checkout extends BaseTest {
         checkoutButton.click();
     }
 
+    public void CheckOutStep1(String fname, String lname, String zcode){
+        firstNameCheckoutInfo.sendKeys( fname );
+        lastNameCheckoutInfo.sendKeys( lname );
+        zipCodeCheckoutInfo.sendKeys(  zcode  );
+        continueBtnCheckout.click();
+    }
+    public double validateCartTotal(){
+        String totalText = carTotal.getText();
+        String numericValue = totalText.replaceAll( "[^0-9.]", "" );
+        double totalDouble = Double.parseDouble( numericValue );
+        return totalDouble;
+    }
+
+    public void FinishCheckout(){
+        finishBtn.click();
+    }
+
+    public  String validateCheckoutComplete(){
+        return orderSuccessText.getText();
+    }
+    public  void clickBackToHome(){
+        backHomeBtn.click();
+    }
 
 }
